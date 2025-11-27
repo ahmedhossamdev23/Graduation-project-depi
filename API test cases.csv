@@ -1,0 +1,41 @@
+﻿Test Case ID,API Name,Endpoint,Method,Preconditions,Test Steps,Test Data,Expected Result,Postman Setup,Status
+TC_01,Get All Products List,/api/productsList,GET,API server is reachable and there is netwrok access.,Open Postman → Create GET request → Enter endpoint → Send,None,200 OK + JSON list of all products,"URL: https://automationexercise.com/api/productsList
+Method: GET",Pass
+TC_02,POST To All Products List,/api/productsList,POST,API server is reachable and there is netwrok access.,Open Postman → Create POST request → Enter endpoint → Send,None,405 Method Not Allowed,"URL: https://automationexercise.com/api/productsList
+Method: POST",Pass
+TC_03,Get All Brands List,/api/brandsList,GET,API server is reachable and there is netwrok access.,Open Postman → Create GET request → Enter endpoint → Send,None,200 OK + JSON list of all brands,"URL: https://automationexercise.com/api/brandsList
+Method: GET",Pass
+TC_04,PUT To All Brands List,/api/brandsList,PUT,API server is reachable and there is netwrok access.,Open Postman → Create PUT request → Enter endpoint → Send,None,405 Method Not Allowed,"URL: https://automationexercise.com/api/brandsList
+Method: PUT",Pass
+TC_05,POST To Search Product,/api/searchProduct,POST,API server is reachable; product exists.,Open Postman → Create POST → Body (form-data) → Add search_product → Send,search_product = 'tshirt',200 OK + Matching product list,"Method: POST
+Body: form-data
+Key: search_product",Pass
+TC_06,POST Search Product – Missing Parameter,/api/searchProduct,POST,API server is reachable and there is netwrok access.,Open Postman → Create POST → Body empty → Send,None,400 Bad Request: Missing search_product,"Method: POST
+Body: empty",Pass
+TC_07,POST Verify Login (Valid),/api/verifyLogin,POST,Valid user credentials exist.,Open Postman → POST → Body form-data → Add email + password → Send,"email:manual_user@gmail.com
+password:manual@user2025",200 OK + User exists!,"Method: POST
+Body: form-data
+Keys: email, password",Pass
+TC_08,POST Verify Login – Missing Email,/api/verifyLogin,POST,API server is reachable and there is netwrok access.,Open Postman → POST → Body form-data → Only password → Send,password=manual@user2025,400 Bad Request: Missing email or password,"Method: POST
+Body: form-data",Pass
+TC_09,DELETE Verify Login,/api/verifyLogin,DELETE,API server is reachable and there is netwrok access.,Open Postman → DELETE → Enter endpoint → Send,None,405 Method Not Allowed,Method: DELETE,Pass
+TC_10,POST Verify Login – Invalid Credentials,/api/verifyLogin,POST,API server is reachable and there is netwrok access.,Open Postman → POST → Wrong email/password → Send,"email=wrong@mail.com
+password=wrong",404 Not Found: User not found,"Method: POST
+Body: form-data",Pass
+TC_11,Create User Account,/api/createAccount,POST,Unique email must be used.,Open Postman → POST → Form-data → Fill all fields → Send,"name=Mokhtar Test
+email=mokhtar@gmail.com
+password=mokhtar@user2025
+firstname=Mokhtar
+lastname=Erfan
+address1=Cairo",201 Created: User created!,"Method: POST
+Body: form-data
+Fill all fields",Pass
+TC_12,Delete User Account,/api/deleteAccount,DELETE,User account must exist.,Open Postman → DELETE → Form-data → Add email + password → Send,"email=mokhtar@gmail.com
+password=mokhtar@user2025",200 OK: Account deleted,"Method: DELETE
+Body: form-data",Pass
+TC_13,Update User Account,/api/updateAccount,PUT,User account must exist.,Open Postman → PUT → Form-data → Add email + updated fields → Send,"email=mokhtar@gmail.com
+name=Mokhtar Updated
+city=Nasr City",200 OK: User updated,"Method: PUT
+Body: form-data",Pass
+TC_14,Get User Details by Email,/api/getUserDetailByEmail?email=,GET,User must exist.,Open Postman → GET → Add email as query param → Send,email=mokhtar@gmail.com,200 OK: User details displayed,"Method: GET
+Params: email",Pass
